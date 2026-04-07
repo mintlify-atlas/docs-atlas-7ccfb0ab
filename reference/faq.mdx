@@ -1,0 +1,290 @@
+---
+title: 'FAQ'
+description: 'Answers to common questions about Agent Skills, installation, and the khazix-writer skill. All answers drawn from the source documentation.'
+---
+
+<Info>
+  All answers on this page are drawn directly from the source files: the khazix-skills README, the khazix-writer SKILL.md, and the internal reference documents.
+</Info>
+
+---
+
+## About the Agent Skills standard
+
+<AccordionGroup>
+  <Accordion title="What is the Agent Skills open standard?">
+    Agent Skills is an open standard for packaging structured instructions into reusable, portable modules that AI agents can load and execute.
+
+    A Skill is not just a text file — it is a folder that can contain instructions, scripts, and reference resources. The standard defines how Skills are structured so that different AI tools can load and use them consistently.
+
+    The design philosophy behind the standard is **composable, portable, and on-demand**: multiple Skills can work together simultaneously, the same Skill can be used across different tools, and Skills are loaded only when the relevant scenario calls for them.
+
+    The khazix-skills repository follows this standard. From the README:
+
+    > Skill 是遵循 [Agent Skills](https://agentskills.io) 开放标准的结构化指令集，由包含指令、脚本和参考资源的文件夹组成，用于扩展 AI Agent 的能力边界。
+  </Accordion>
+
+  <Accordion title="How is a Skill different from a system prompt?">
+    A system prompt is a static block of text that applies to every interaction. A Skill is a modular instruction set that is loaded selectively — either automatically when the agent detects the relevant context, or manually when you invoke it by name.
+
+    Key differences:
+
+    - **Scope:** A system prompt is always active. A Skill activates only when needed.
+    - **Composability:** Multiple Skills can be active simultaneously and can reference each other's resources (for example, khazix-writer's SKILL.md references `references/style_examples.md` and `references/content_methodology.md` as companion resources).
+    - **Portability:** A Skill packaged as a `.skill` file can be installed into any compatible agent tool. A system prompt is tied to a specific conversation or configuration.
+    - **Structure:** A Skill is a folder with a defined layout — not a single text block.
+  </Accordion>
+
+  <Accordion title="Can I use these skills with any AI tool?">
+    You can use them with any tool that supports the Agent Skills standard. The README lists three tools explicitly:
+
+    | Tool | Skills path |
+    |------|-------------|
+    | Claude Code | `~/.claude/skills/` |
+    | OpenClaw | `~/.openclaw/skills/` |
+    | Codex | `~/.agents/skills/` |
+
+    The standard is designed to be tool-agnostic. If your tool supports Agent Skills, install the `.skill` file in the tool's Skills directory. If your tool does not yet support the standard natively, you can copy the contents of SKILL.md into your system prompt as a workaround — though you will lose the automatic activation and reference file loading.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## About installation
+
+<AccordionGroup>
+  <Accordion title="How do I know if a skill installed correctly?">
+    The most reliable test is to trigger the Skill deliberately and check whether the agent's behavior changes.
+
+    For khazix-writer specifically: send a message like "帮我写一篇公众号文章" (help me write a WeChat article) and check whether the agent adopts the Khazix style — colloquial tone, no colons or em-dashes in output, no bullet-point-heavy structure, no banned phrases like "说白了" or "值得注意的是".
+
+    For automatic activation: the agent should detect relevant trigger words and load the Skill without you specifying it. For khazix-writer, trigger words include: 写文章、写稿子、帮我写、续写、扩写、公众号文章、长文、出稿、按我的风格写.
+
+    You can also manually invoke a Skill with `/skill-name` in tools that support that syntax.
+  </Accordion>
+
+  <Accordion title="Where exactly should I put the .skill file?">
+    Place the `.skill` file in the Skills directory for your specific tool:
+
+    | Tool | Path |
+    |------|------|
+    | Claude Code | `~/.claude/skills/` |
+    | OpenClaw | `~/.openclaw/skills/` |
+    | Codex | `~/.agents/skills/` |
+
+    The README also describes two installation methods:
+
+    **Via agent dialog** (simpler): In a supported agent, say:
+    ```
+    安装这个 skill：https://github.com/KKKKhazix/khazix-skills
+    ```
+
+    **Manual installation**: Download the `.skill` package from the Releases page of the repository, then drag the file into the appropriate directory above.
+  </Accordion>
+
+  <Accordion title="Can I install multiple skills?">
+    Yes. The Agent Skills standard is explicitly designed for composability — multiple Skills can be active simultaneously. From the README:
+
+    > 多个 Skill 可以协同工作，同一个 Skill 可以跨工具使用。
+
+    Each Skill activates based on its own trigger conditions. Skills that are active at the same time can reference each other's resources if the tool supports cross-Skill loading.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## About khazix-writer
+
+<AccordionGroup>
+  <Accordion title="When does khazix-writer activate automatically?">
+    The Skill activates when the agent detects that the user wants to produce a long-form WeChat article. From SKILL.md:
+
+    > 触发词包括但不限于：写文章、写稿子、帮我写、续写、扩写、公众号文章、长文、出稿、按我的风格写。
+
+    It also activates on intent, not just keywords. If the user says "帮我把这个写成文章" (help me turn this into an article) or "用我的风格写一下" (write this in my style), and the context involves content creation or WeChat output, the Skill should activate.
+
+    It also covers: the user providing a PDF, brief, news link, voice-to-text, or any material and saying "help me write an article from this."
+  </Accordion>
+
+  <Accordion title="When should I NOT use khazix-writer?">
+    The Skill explicitly excludes two use cases:
+
+    1. **Short-form content:** Xiaohongshu posts, tweets, Moments (朋友圈) updates. These are different formats with different constraints.
+    2. **Title and summary generation:** That function belongs to a separate skill (`wechat-title skill`).
+
+    If you need to generate headlines or short summaries, do not use khazix-writer.
+  </Accordion>
+
+  <Accordion title="What language does khazix-writer write in?">
+    Simplified Chinese. The account 数字生命卡兹克 publishes in Chinese, and all the style rules, banned phrases, recommended expressions, and example texts in the Skill are written in Chinese.
+
+    The Skill is not designed to produce English-language content. Attempting to use it for English output would require adapting the style guidelines — the colloquialisms, punctuation rules, and oral patterns are specific to spoken Mandarin Chinese.
+  </Accordion>
+
+  <Accordion title="What types of articles can khazix-writer help with?">
+    The Skill defines five article archetypes:
+
+    1. **调查实验型 (Investigative/Experiment):** The writer actually does something and reports what they found. Examples: buying ¥9.9 DeepSeek, poisoning AI with a fake note, hiring someone for ¥499 to install OpenClaw. Core value: "I did this for you."
+
+    2. **产品体验型 (Product experience):** Hands-on use of a product, bringing the reader along. Examples: miclaw phone Agent, Seedance 2.0. Core value: "come play with me."
+
+    3. **现象解读型 (Phenomenon analysis):** Observing something interesting and layering progressively deeper analysis. Examples: three-panel images going viral, AI not seeing the heart emoji. Core value: "did you notice this? here's what's behind it."
+
+    4. **工具分享型 (Tool sharing):** Introducing a useful tool or Prompt, wrapped in personal story. Example: Talent-excavation Prompt. Core value: "I found something good."
+
+    5. **方法论分享型 (Methodology):** Systematic sharing of accumulated experience. Examples: "how to reclaim your creativity," "9 lessons from 3 years using AI." Core value: "I'm giving you what's actually in my toolkit."
+  </Accordion>
+
+  <Accordion title="How long should the articles be?">
+    From SKILL.md:
+
+    > 公众号长文一般在4000-8000字
+
+    4,000 to 8,000 Chinese characters for a standard long-form article. Individual paragraphs should be short — often a single sentence. Important observations get visual breathing room: blank lines before and after.
+
+    The Skill does not use markdown headers (H2, H3) for most articles. The article flows without section titles, using colloquial transition sentences to carry the reader from block to block. The only exception is "N条心得/方法" (N lessons / methods) style articles, which may use numeric labels (1, 2, 3) — but even these are plain numbers in the text, not formatted headings.
+  </Accordion>
+
+  <Accordion title="Can khazix-writer write the entire article for me?">
+    No — and the Skill is explicit about this. From SKILL.md:
+
+    > 这个skill是一个文风生成器，不是替代你思考的工具。AI最大的价值不是生成内容，而是提供素材和启发。
+
+    The things AI cannot do for you:
+
+    - **First-hand observations and real experiences:** Buying the ¥9.9 DeepSeek, hiring the installation service — these cannot be invented. If invented, they read as fake.
+    - **Core creative angles:** The leap from "Taobao selling DeepSeek" to "information folding" — the insight that makes an article stand up. AI can offer candidates; only you can recognize the right one.
+    - **Authentic emotional expression:** "我当时就愣住了" (I just froze) vs. "我当时很震撼" (I was very moved). The first is a body memory; the second is a description. AI defaults to the second.
+    - **Data-to-person empathy:** Turning "1000 paid users" into a specific 20-something in a fourth-tier city — this requires genuine human empathy, not pattern matching.
+  </Accordion>
+
+  <Accordion title="What's the role of AI vs. human in this skill's workflow?">
+    The Skill defines a five-stage collaborative workflow:
+
+    ```
+    人：提供素材 + 核心观点 + 个人经历 + 情绪节点
+     ↓
+    AI：补充背景知识 + 找证据类比 + 结构建议 + 按角度扩写
+     ↓
+    人：二次改写（加入自己的声音、打破节奏、补充真实细节）
+     ↓
+    AI：按四层自检体系检查 → 输出修改建议
+     ↓
+    人：终审和定稿
+    ```
+
+    **Human provides:** raw material, core perspective, personal experience, emotional beats.
+
+    **AI does:** background knowledge, supporting evidence and analogies, structure suggestions, expansion of confirmed angles, and the four-layer quality check.
+
+    **Human must do final review.** The human is the author; AI is a skilled research assistant and writing partner.
+  </Accordion>
+
+  <Accordion title="What are the five article archetypes?">
+    The five archetypes are covered in the question "What types of articles can khazix-writer help with?" above.
+
+    To summarize the writing emphasis for each:
+
+    | Archetype | Writing focus |
+    |-----------|---------------|
+    | 调查实验型 | Process narrative + layered discovery |
+    | 产品体验型 | Scene demonstration + genuine reactions |
+    | 现象解读型 | Curiosity → research → knowledge → philosophical elevation |
+    | 工具分享型 | Personal story setup → tool reveal → wow moment |
+    | 方法论分享型 | Actionable steps + honest learning curve + humility preface |
+  </Accordion>
+
+  <Accordion title="What's the HKR method?">
+    HKR is a topic quality filter applied before writing begins. Every topic must pass at least two of the three criteria to be worth writing:
+
+    - **H (Happy):** Is it interesting enough? Does it have suspense? Would the title and opening make someone want to click?
+    - **K (Knowledge):** Does it contain real information? Will the reader learn something new after reading?
+    - **R (Resonance):** Does it hit an emotion? Will it make someone think "yes, exactly, I've thought this too"?
+
+    **S-grade topic:** all three. **Passing topic:** at least two. **One criterion:** reconsider the angle. **Zero:** do not write.
+
+    The filter is applied from the perspective of three imagined readers: "a busy ordinary user" (will this save me time?), "a playful friend" (is this surprising enough to make me say "whoa"?), and "an anxious learner" (will I have a new angle after reading?).
+  </Accordion>
+
+  <Accordion title="What does the four-layer self-check system check?">
+    After drafting, the article must pass all four layers before it is ready:
+
+    **L1 — Hard rules (automatic scan layer):**
+    Banned words must be replaced: "说白了", "意味着什么", "本质上", "换句话说", "不可否认", "综上所述", "首先...其次...最后", "值得注意的是", "不难发现".
+    Banned punctuation must be removed: colons (：), em-dashes (——), double quotation marks ("" and "").
+    Structural clichés must be removed: "让我们来看看", "在当今...的时代", bullet point lists of more than 3 items, extended bold text.
+    All AI tool names must be specific — no "AI工具" or "某个模型".
+
+    **L2 — Style consistency (pattern matching layer):**
+    Opening: does it start from a specific, present event? Does the first sentence generate "then what?"
+    Rhythm: are sentences varying in length? Does at least one sentence stand alone as its own paragraph (minimum 3 times)? Are digressive paragraphs pulled back by a line-tying sentence?
+    Colloquial language: at least 8-10 different colloquial expressions used. At least one intentional disruption in argument flow. At least one moment of self-deprecation or admission of limitation.
+
+    **L3 — Content quality (deep review layer):**
+    Every core claim has a specific person/scene/detail/data point supporting it — no unsupported assertions.
+    Knowledge appears "casually retrieved," never introduced with "let me explain" or "first, you need to know."
+    At least one cultural/philosophical/historical elevation exists and feels natural.
+    The opposing view is acknowledged before the writer's own position is stated.
+    Article type-specific checks: investigation articles have first-hand narrative; methodology articles have honest learning curve and humble opening.
+
+    **L4 — Living person final review (most important layer):**
+    Read the full article as a reader and answer: does this feel like a knowledgeable ordinary person genuinely talking about something that moved them — or does it feel like an AI outputting information?
+    Specific checks: emotional language is body-memory-based, not knowledge-description-based; the article has a perspective only this writer would take; the tone stays as "a thoughtful regular person," never sliding into "teacher instructing students"; there are no points where a reader's attention would break and they would need to re-read a section to follow the logic.
+
+    L4 has no mechanical fix. If a section feels AI-heavy, rewrite it by asking: how would Khazix actually say this sentence to a friend?
+  </Accordion>
+
+  <Accordion title="What are the most common banned words/patterns?">
+    The following are flagged in L1 and must be replaced:
+
+    | Banned | Replace with |
+    |--------|-------------|
+    | 说白了 | 坦率的讲 / 其实就是 |
+    | 意味着什么 / 这意味着 | 那结果会怎样呢 / 所以呢 |
+    | 本质上 | 说到底 / 其实 |
+    | 换句话说 | 你想想看 / 也就是说 |
+    | 不可否认 | (delete it; restate positively) |
+    | 综上所述 / 总的来说 | specific callback sentence |
+    | 首先...其次...最后 | natural transition words |
+    | 值得注意的是 / 不难发现 | (delete; just say it) |
+
+    Additional hard bans:
+
+    - **"在当今AI快速发展的时代"** and any variant of this opening — always start from a specific current event instead
+    - **Colon (：)** — use a comma instead
+    - **Em-dash (——)** — use a comma or period instead
+    - **Double quotation marks (" " and " ")** — use 「」 or no quotation marks
+    - **"AI工具" / "某个模型"** — always use specific product names (Claude Code, Deepresearch, Seedance 2.0, etc.)
+    - **Invented hypothetical examples ("比如有一次...")** — use real present-tense examples or honestly say you haven't tried it
+
+    <Warning>
+      "说白了" is flagged as the single most reliable AI fingerprint phrase. Its appearance in output is an immediate signal that the style rules have not been applied.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## About contributing
+
+<AccordionGroup>
+  <Accordion title="Can I submit my own skills to this collection?">
+    The README does not document a formal contribution process for adding new Skills to the collection. It describes the repository as the author's personal Skills, open-sourced as-is:
+
+    > 这里是我自己在用的、经过长期打磨的 Skills，现在决定把它们完整地、一字不改地开源出来。
+
+    (These are the Skills I use myself, refined over a long period. I'm now open-sourcing them completely, without changing a single character.)
+
+    For contribution or feedback, the contact listed in the SKILL.md footer is: wzglyay@virxact.com
+  </Accordion>
+
+  <Accordion title="How are skills licensed?">
+    The khazix-skills repository is licensed under the MIT license.
+
+    From the README:
+
+    > [MIT License](https://github.com/KKKKhazix/khazix-skills/blob/main/LICENSE)
+
+    MIT is a permissive open-source license. You are free to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the Skills, provided the original license notice is preserved.
+  </Accordion>
+</AccordionGroup>

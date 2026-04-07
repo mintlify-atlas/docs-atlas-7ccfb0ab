@@ -1,0 +1,78 @@
+---
+title: "Installation"
+description: "Install Khazix Skills via your agent in one message, or manually by dropping a .skill file into your tools directory."
+---
+
+## Supported tools
+
+Khazix Skills works with any agent that supports the Agent Skills open standard:
+
+- Claude Code
+- OpenClaw
+- Codex
+
+## Installation methods
+
+<Tabs>
+  <Tab title="Via agent">
+    The easiest way to install a skill is to ask your agent to do it for you. Open a chat in any supported tool and send the GitHub URL:
+
+    <Steps>
+      <Step title="Open your agent">
+        Start a new session in Claude Code, OpenClaw, Codex, or any other supported agent.
+      </Step>
+      <Step title="Paste the installation message">
+        Send the following message to your agent:
+
+        ```text
+        Install this skill: https://github.com/KKKKhazix/khazix-skills
+        ```
+
+        The agent will fetch the repository, identify the available skills, and install them to the correct directory for your tool automatically.
+      </Step>
+      <Step title="Verify installation">
+        Once the agent confirms installation, try triggering a skill to confirm it is working. See [Verify your installation](#verify-your-installation) below.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Manual">
+    If you prefer to install skills yourself, download the packaged release and place it in your tool's skills directory.
+
+    <Steps>
+      <Step title="Download the .skill package">
+        Go to the [Releases page](https://github.com/KKKKhazix/khazix-skills/releases) on GitHub and download the `.skill` file for the skill you want to install.
+      </Step>
+      <Step title="Find your tool's skills directory">
+        Locate the skills directory for the tool you are using:
+
+        | Tool | Skills directory |
+        |------|-----------------|
+        | Claude Code | `~/.claude/skills/` |
+        | OpenClaw | `~/.openclaw/skills/` |
+        | Codex | `~/.agents/skills/` |
+      </Step>
+      <Step title="Drop the file into the directory">
+        Drag the `.skill` file into the directory for your tool. No further setup is needed — the agent will detect it automatically on the next session.
+      </Step>
+      <Step title="Verify installation">
+        Restart your agent session and try triggering the skill. See [Verify your installation](#verify-your-installation) below.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Verify your installation
+
+After installing, confirm the skill is working by triggering it in a new session.
+
+<Tip>
+  For `khazix-writer`, open a new chat and say "帮我写一篇公众号文章" or paste in a brief and ask the agent to turn it into an article. If the skill loaded correctly, the agent will follow the khazix-writer methodology automatically.
+
+  You can also invoke any skill manually with `/skill-name`, for example `/khazix-writer`.
+</Tip>
+
+## Available skills
+
+| Skill | Description |
+|-------|-------------|
+| `khazix-writer` | Khazix's WeChat long-form writing skill — style rules, four-layer self-review system, content methodology, and style examples. |

@@ -1,0 +1,61 @@
+{
+  "projectType": "general",
+  "projectName": "Agent Skills",
+  "projectDescription": "An open-source collection of AI Skills by Khazix, following the Agent Skills open standard to extend AI agent capabilities with structured, composable instruction sets.",
+  "theme": "willow",
+  "primaryColor": "#7c7c7c",
+  "lightColor": "#050505",
+  "darkColor": "#bdbdbd",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "what-is-a-skill",
+              "installation"
+            ]
+          },
+          {
+            "group": "Khazix Writer Skill",
+            "pages": [
+              "khazix-writer/overview",
+              "khazix-writer/writing-process",
+              "khazix-writer/style-guide",
+              "khazix-writer/content-methodology",
+              "khazix-writer/quality-checklist"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "reference/style-examples",
+              "reference/faq"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Structured AI Skill format following the Agent Skills open standard",
+    "Composable and portable skills that work across AI tools (Claude Code, Codex, OpenClaw)",
+    "Khazix Writer: WeChat long-form article writing skill with full style rules",
+    "Four-layer self-check quality system (L1-L4) for article review",
+    "HKR topic validation method (Happy, Knowledge, Resonance)",
+    "Five article archetypes with specific writing strategies",
+    "Curated style examples library with AI vs. human comparison",
+    "Content methodology including topic sourcing and creative case development"
+  ],
+  "publicApiSurface": [
+    "khazix-writer skill (trigger: writing WeChat long-form articles)",
+    "HKR quality check method",
+    "Four-layer self-check system (L1: hard rules, L2: style consistency, L3: content quality, L4: human feel)",
+    "Five article archetypes: investigative-experiment, product-experience, phenomenon-analysis, tool-sharing, methodology-sharing",
+    "Manual installation via .skill package",
+    "Agent installation via GitHub URL"
+  ]
+}

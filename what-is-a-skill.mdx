@@ -1,0 +1,80 @@
+---
+title: "What is a Skill?"
+description: "Skills are structured instruction sets following the Agent Skills open standard that extend AI agent capabilities."
+---
+
+## Definition
+
+A Skill is a structured instruction set that follows the [Agent Skills](https://agentskills.io) open standard. It is distributed as a folder containing instructions, scripts, and reference resources — everything an AI agent needs to adopt a specific methodology or domain expertise for a given task.
+
+Skills are not just system prompts. They are self-contained, versioned modules that agents can load, combine, and reuse across different tools and workflows.
+
+## How agents load skills
+
+Agents interact with skills in two ways:
+
+**Automatic loading** — when an agent detects that the current context matches a skill's trigger conditions (defined in its frontmatter), it loads the skill automatically. For example, the `khazix-writer` skill loads whenever a user asks to write a WeChat article, draft long-form content, or expand a brief into a full piece.
+
+**Manual invocation** — you can also trigger any installed skill explicitly using the `/skill-name` syntax in your agent's chat interface.
+
+```text
+/khazix-writer
+```
+
+## Folder structure
+
+A skill lives in a single directory. At minimum it contains a `SKILL.md` file. Most skills also include a `references/` directory with supporting materials the agent can consult during a task.
+
+```
+khazix-writer/
+├── SKILL.md
+└── references/
+    ├── style_examples.md
+    └── content_methodology.md
+```
+
+## The SKILL.md file
+
+`SKILL.md` is the entry point of every skill. It starts with YAML frontmatter that tells agents when and how to load it, followed by the full instruction set in Markdown.
+
+The frontmatter defines the skill's name and the trigger conditions the agent uses to decide when to auto-load it:
+
+```yaml
+---
+name: khazix-writer
+description: |
+  数字生命卡兹克（Khazix）的公众号长文写作skill。当用户需要撰写公众号文章、写稿子、续写文章、根据素材产出长文时使用。触发词包括但不限于：写文章、写稿子、帮我写、续写、扩写、公众号文章、长文、出稿、按我的风格写。即使用户只是说"帮我把这个写成文章"或"用我的风格写一下"，只要上下文涉及内容创作和公众号输出，都应该触发。也适用于用户丢过来一个PDF、brief、新闻链接、语音转文字或任何素材说"帮我写篇文章"的场景。不要用于短内容（小红书帖子、推特、朋友圈）或纯标题摘要生成（那个用wechat-title skill）。
+---
+```
+
+The body of `SKILL.md` contains the actual instructions: writing principles, step-by-step workflows, quality checklists, style rules, and anything else the agent needs to do the job well.
+
+## Design principles
+
+<Info>
+  These three principles apply to every skill in the Khazix Skills collection.
+</Info>
+
+**Composable** — multiple skills can be active at the same time and collaborate on a single task. A writing skill and a research skill can work together without conflict.
+
+**Portable** — a skill is just a folder of files. It works in Claude Code, Codex, OpenClaw, or any other agent that supports the Agent Skills standard. You install it once and it follows you across tools.
+
+**On-demand loading** — agents only load a skill when its trigger conditions match the current context. Skills stay out of the way until they are relevant, keeping the agent's context clean.
+
+## Skills vs. plain prompts
+
+| | Plain prompt | Skill |
+|---|---|---|
+| Reusable across sessions | No | Yes |
+| Works across different tools | No | Yes |
+| Can include reference files | No | Yes |
+| Auto-loads in context | No | Yes |
+| Versioned and distributable | No | Yes |
+
+## Multi-skill collaboration
+
+When multiple skills are installed, agents can draw on more than one at a time. For example, a `khazix-writer` skill and a `wechat-title` skill (for headline generation) can be used together in the same writing session — each handles what it is designed for, and neither steps on the other.
+
+<Note>
+  The same skill file works across all tools that support the Agent Skills standard. You do not need separate versions for different agents.
+</Note>

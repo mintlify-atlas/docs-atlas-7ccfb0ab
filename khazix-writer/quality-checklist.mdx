@@ -1,0 +1,353 @@
+---
+title: "Quality Checklist"
+description: "The four-layer self-check system for Khazix-style articles — from hard rules to human feel. All four layers must pass before the article is complete."
+---
+
+<Note>
+  This is the most technical page in the Khazix Writer documentation. Every completed draft must be run through all four layers before delivery. This is not optional.
+</Note>
+
+## Overview
+
+The four-layer self-check system is designed after the software testing pyramid: from the most mechanical, objective rules to the most subjective, human-feel judgment — each layer progressively harder to fake.
+
+<CardGroup cols={2}>
+  <Card title="L1: Hard Rules" icon="shield-check">
+    Auto-scan layer. Like a linter. Zero tolerance. Any hit must be fixed before moving to L2.
+  </Card>
+  <Card title="L2: Style Consistency" icon="palette">
+    Pattern matching layer. Like unit tests. Each check is a yes/no judgment against Khazix's established writing patterns.
+  </Card>
+  <Card title="L3: Content Quality" icon="magnifying-glass">
+    Deep review layer. Like integration tests. Evaluates argument depth, knowledge delivery style, and archetype-specific requirements.
+  </Card>
+  <Card title="L4: Human Feel" icon="person">
+    Personality layer. Like a user acceptance test. The only question: does this feel like a real human wrote it?
+  </Card>
+</CardGroup>
+
+<Warning>
+  All four layers must pass before the article is considered complete. Passing L1–L3 but failing L4 means the article is not done — go back and rewrite the AI-tasting sections from the human perspective.
+</Warning>
+
+---
+
+## L1: Hard Rules Check（硬性规则检查 / Auto-Scan Layer）
+
+This layer checks rules that are absolute. Like syntax errors in code — no exceptions, no "but it sounds okay here." Any hit must be fixed.
+
+**Passing standard**: Zero hits across all four checks.
+
+<AccordionGroup>
+  <Accordion title="L1-1: Banned Words Scan（禁用词扫描）">
+    Search the full text for every word in this list. Any occurrence must be replaced.
+
+    | Banned Word | Replace With |
+    |-------------|-------------|
+    | 说白了 | 坦率的讲、其实就是 |
+    | 意味着什么 | 那结果会怎样呢、所以呢 |
+    | 这意味着 | 那结果会怎样呢、所以呢 |
+    | 本质上 | 说到底、其实 |
+    | 换句话说 | 你想想看、也就是说 |
+    | 不可否认 | Delete entirely. Restate as a direct positive assertion. |
+    | 综上所述 | Replace with a specific callback to what was said |
+    | 总的来说 | Replace with a specific callback to what was said |
+    | 首先...其次...最后 | Rewrite using natural transition phrases |
+    | 值得注意的是 | Delete. Just say the thing. |
+    | 不难发现 | Delete. Just say the thing. |
+
+    **Why these words**: "说白了" is statistically one of the most AI-overused phrases in Chinese. "这意味着" is a signature AI analytical structure. "本质上" sounds like a philosophy paper. "换句话说" is textbook-style. These patterns immediately break the "real person talking" illusion.
+  </Accordion>
+  <Accordion title="L1-2: Banned Punctuation Scan（禁用标点扫描）">
+    Search the full text for every punctuation mark in this list.
+
+    | Banned | Replace With |
+    |--------|-------------|
+    | Colon `：` | Comma |
+    | Em-dash `——` | Comma or period |
+    | Western double quotes `"..."` | Use `「」` or no quotes at all |
+    | Chinese double quotes `"..."` | Use `「」` or no quotes at all |
+
+    <Warning>
+      AI tends to re-introduce these punctuation marks during revision passes. L1-2 must be run again after every edit, not just after the initial draft.
+    </Warning>
+
+    **Why these rules**: Colons and em-dashes create a formal, report-like rhythm that breaks the conversational tone. Double quotes in Chinese internet writing can feel overly Western or overly academic. `「」` is the standard for Chinese content-creator citation style.
+  </Accordion>
+  <Accordion title="L1-3: Structural Clichés Scan（结构性套话扫描）">
+    Check for the following patterns:
+
+    - "让我们来看看..." / "接下来让我们..."
+    - "在当今...的时代" / "随着...的发展"
+    - Consecutive bullet-point lists with more than 3 items (must be rewritten as prose)
+    - Extended bold text: more than 2 consecutive lines of bold is almost certainly over-structured
+
+    **Fix**: Delete structural transition phrases entirely and replace with direct statements. Rewrite bullet lists as flowing prose with colloquial transitions. Reduce bold to single impactful words or phrases only.
+  </Accordion>
+  <Accordion title="L1-4: Tool Name Check（工具名检查）">
+    Confirm that every AI tool, model, or product mentioned in the article uses its specific, real name.
+
+    **Banned vague references**:
+    - "AI工具"
+    - "某个模型"
+    - "相关技术"
+    - "大语言模型" (when referring to a specific one)
+
+    **Required specificity examples**:
+    - ✅ Claude Code, not "AI编程工具"
+    - ✅ Seedance 2.0, not "某视频生成工具"
+    - ✅ Deepresearch, not "AI搜索工具"
+    - ✅ Clawbot, not "AI助手"
+
+    **Fix**: Replace every vague reference with the actual product name. If the product name isn't known, that's a research gap — fix the underlying knowledge, don't paper over it with vague language.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## L2: Style Consistency Check（风格一致性检查 / Pattern Matching Layer）
+
+This layer checks whether the article matches Khazix's established writing patterns. Each item is a yes/no judgment.
+
+**Passing standard**: L2-1 must pass completely. L2-2 and L2-3 must each pass at least 3 out of 4 checks. L2-4 must pass.
+
+<AccordionGroup>
+  <Accordion title="L2-1: Opening Check（开头检查）">
+    All three must pass:
+
+    - [ ] Does the article open from a specific, immediate, concrete event or scene — not a macro-level scene-setter?
+    - [ ] Does the first sentence make the reader want to know what happens next ("然后呢？")?
+    - [ ] Are there zero textbook-style openings ("在当今AI快速发展的时代...")?
+
+    **Fix**: Rewrite the opening from scratch. Start with a concrete, specific, right-now event. Use one of the four opening techniques: narrative launch, absurd fact, breaking news, or curiosity-driven. See the [Style Guide](/khazix-writer/style-guide) for examples.
+  </Accordion>
+  <Accordion title="L2-2: Rhythm and Structure Check（节奏与结构检查）">
+    At least 3 of 4 must pass:
+
+    - [ ] Are there varied sentence lengths? (Three or more consecutive sentences of similar length = flat rhythm)
+    - [ ] Are there at least 3 instances of a single sentence standing alone as its own paragraph (sentence fracture 句式断裂)?
+    - [ ] After paragraphs that drift from the main line, is there an anchor sentence (扣主线句) pulling back?
+    - [ ] Are there question sentences used as rhythm brakes at key transitions?
+
+    **Bonus check**: Does the article avoid unnecessary subheadings? (Exception: numbered items in a methodology article with 3+ sections.)
+
+    **Fix for flat rhythm**: Break long sentences. Create paragraph breaks after strong statements. Add a question sentence before a new information block. Insert an anchor sentence after any digression longer than 2 paragraphs.
+  </Accordion>
+  <Accordion title="L2-3: Colloquial Expression Check（口语化检查）">
+    At least 3 of 4 must pass:
+
+    - [ ] Are there at least 8–10 different colloquial expressions from the recommended phrases list used throughout the full article?
+    - [ ] Is there at least one instance of "intentional disruption in argument" (repetition, mid-sentence interruption, subject omission, deliberate vagueness)?
+    - [ ] Is there at least one instance of self-deprecation or acknowledged uncertainty?
+    - [ ] Is punctuation used for emotional expression at least once? ("。。。" or "？？？" or "= =")
+
+    **Fix**: Go section by section. Identify paragraphs that "read like a report." Replace formal transitions with colloquial ones. Add one self-deprecating aside. Add one emotional punctuation moment. Add intentional disruption to at least one analytical passage.
+  </Accordion>
+  <Accordion title="L2-4: Punctuation Prohibition Re-confirmation（标点禁令二次确认）">
+    Must pass completely:
+
+    - [ ] Zero colons in the full text
+    - [ ] Zero em-dashes in the full text
+    - [ ] Zero double quotes (Western or Chinese) in the full text
+
+    This check is separate from L1-2 because AI frequently re-introduces banned punctuation during the editing and revision process. Run this again after every edit pass.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## L3: Content Quality Check（内容质量检查 / Deep Review Layer）
+
+This layer evaluates the actual depth and persuasiveness of the content. L3-1 and L3-2 are mandatory. L3-3 through L3-6 are checked according to the article's type (skip items that don't apply).
+
+**Passing standard**: L3-1 and L3-2 must both pass completely. Relevant items from L3-3 through L3-6 must pass.
+
+<AccordionGroup>
+  <Accordion title="L3-1: Argument Support Check（观点支撑检查）">
+    **Mandatory.**
+
+    - [ ] Does every core argument have at least one specific person / scene / concrete detail / data point supporting it?
+    - [ ] Are there any sections that have a conclusion but no example or evidence?
+
+    **Fix**: For each unsupported argument, add one of: a real personal experience, a specific data point with source, a concrete human scenario (character portrait method), or a historical/cultural parallel.
+
+    This check specifically targets the pattern of making an assertion and then moving on without grounding it. If you wouldn't believe it from a stranger without evidence, the reader won't either.
+  </Accordion>
+  <Accordion title="L3-2: Knowledge Delivery Style Check（知识输出方式检查）">
+    **Mandatory.**
+
+    - [ ] Is knowledge presented as "pulled out in passing while chatting" — not "let me now explain this"?
+    - [ ] Are there any passages that open with "下面我来介绍" / "首先需要了解" or equivalent textbook-style introductions?
+    - [ ] Are references (papers, books, history) woven naturally into the argument, feeling like "I just remembered this" rather than "I went and looked this up"?
+
+    **Good pattern** (Gestalt psychology introduced organically):
+    > 突然想起了以前做交互设计的时候，有一个几乎刻在我血液里的心理学，这玩意，叫格式塔心理学。几乎就是用户体验行业的基石之一。里面有一个非常牛逼的原则，叫"共同命运法则"。
+
+    **Bad pattern** (never do this):
+    > 下面我来简单介绍一下格式塔心理学。格式塔心理学起源于20世纪初的德国...
+
+    **Fix**: Reframe any textbook-style knowledge block with a personal memory or trigger ("突然想起了"、"这让我想到了"). Let the knowledge emerge from the narrative rather than interrupting it.
+  </Accordion>
+  <Accordion title="L3-3: Cultural Elevation Check（文化升维检查）">
+    - [ ] Is there at least one moment where a specific topic or event connects to a larger cultural / philosophical / historical reference?
+    - [ ] Does this connection feel organic — "I was talking about this and naturally thought of that" — rather than forced?
+
+    **Examples of organic elevation:**
+    - ¥9.9 DeepSeek → 《北京折叠》 → information folding in the AI era
+    - AI can't see the heart → Gestalt psychology → "we live in streams, AI lives in frames"
+    - Three-panel image virality → 2014 black-border photos → the human need for narrative
+
+    **Fix if forced**: The elevation is only valuable when it genuinely illuminates the specific topic. If the connection requires explanation to make sense, it's not organic enough. Find a different reference, or let the elevation emerge from a different angle.
+  </Accordion>
+  <Accordion title="L3-4: Opposing View and Empathy Check（对立面与同理心检查）">
+    - [ ] When presenting the core argument, is there acknowledgment and genuine understanding of the opposing position?
+    - [ ] Before giving your viewpoint, does the article first inhabit the reader's perspective and acknowledge that perspective as reasonable?
+
+    **Example of doing this right:**
+    > 我非常理解这种感觉。
+    >
+    > 你不是程序员，不需要写代码。你不是做内容的，不需要天天写文章。你就是一个普通的上班族，每天处理一些琐碎的工作，AI能帮你什么？
+    >
+    > 其他答案特别简单。
+
+    **Fix**: Before the section where the main argument is made, add a paragraph that fully articulates the opposite or skeptical position — specifically and compassionately, not as a strawman. Then acknowledge it ("我非常理解这种感觉"). Then present your view.
+  </Accordion>
+  <Accordion title="L3-5: Article Type Specific Check（文章类型专项检查）">
+    Run only the check that matches the article's archetype:
+
+    **Investigative-Experiment Type（调查实验型）**
+    - [ ] Does the article have the texture of "I was actually there doing this" — not "I'm imagining doing this"?
+    - [ ] Does the process reveal findings in layers, each one building on the last?
+
+    **Product-Experience Type（产品体验型）**
+    - [ ] Is there a real, specific usage scenario demonstrated (not just described)?
+    - [ ] Are there natural comparisons to other products — not forced, but coming up organically because of the experience?
+
+    **Phenomenon-Analysis Type（现象解读型）**
+    - [ ] Does the article follow the "observation → curiosity → research → elevation" arc?
+    - [ ] Does the philosophical or cultural connection feel like it emerged from genuine curiosity rather than being pre-planned?
+
+    **Tool-Sharing Type（工具分享型）**
+    - [ ] Is there a personal story setup before the tool is introduced?
+    - [ ] Does the result demonstration produce a genuine "卧槽" (wow) reaction?
+
+    **Methodology-Sharing Type（方法论分享型）**
+    - [ ] Does every section end with at least one action the reader can take today?
+    - [ ] Does the article honestly acknowledge the learning curve and potential failure points?
+    - [ ] Is there a humility preface at the opening that defuses the "let me teach you" posture?
+    - [ ] Does the closing return to all action points and elevate?
+  </Accordion>
+  <Accordion title="L3-6: Escalating Showcase Check（逐一展示检查）">
+    Only applies when the article compares or tests multiple products, models, or cases.
+
+    - [ ] Are the multiple items shown one by one, each with a personal reaction, comment, or jab?
+    - [ ] Does the ordering follow 升番 logic — weakest first, most impactful last?
+    - [ ] Is there a rising emotional arc, with each reveal being more surprising or dramatic than the last?
+
+    **Fix if failing**: Reorder the cases from least to most impressive. Add a short personal reaction after each one (吐槽, comparison, surprise). Make sure the final case genuinely feels like the climax.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## L4: Human Feel Final Review（活人感终审 / Personality Layer）
+
+This is the most important and most subjective layer. This is not a checklist of individual items — it's a full read-through from the reader's perspective, answering one core question:
+
+<Note>
+  **The core question**: "Reading this article, do I feel like a knowledgeable ordinary person is earnestly talking to me about something that moved them — or do I feel like an AI is outputting information at me?"
+</Note>
+
+**Passing standard**: All four dimensions feel like "a real human wrote this." If any dimension makes you think "this section is too AI-flavored," the article is not done.
+
+<AccordionGroup>
+  <Accordion title="L4-1: Warmth / Temperature Check（温度感）">
+    - Are the emotional expressions in the article **body-memory** language ("我当时就愣住了"、"鼻子一酸") — or **knowledge-label** language ("我感到非常震撼")?
+    - If there are human characters portrayed in the article, can you feel their body temperature? Do they feel like real people?
+
+    **The distinction:**
+    - ✅ Body-memory: "我当时就愣住了" — a physical, specific reaction
+    - ❌ Knowledge-label: "我当时很震撼" — a categorical emotional descriptor
+
+    AI defaults to knowledge-label language. Humans speak in body-memories. When in doubt, make the emotion more specific and physical.
+
+    **Fix**: Find every emotional moment in the article. If the language is categorical ("很震惊"、"非常感动"), replace it with a physical or behavioral reaction specific to that moment.
+  </Accordion>
+  <Accordion title="L4-2: Uniqueness Check（独特性）">
+    - Is there an angle in this article that only Khazix would write? Something that comes from a specific combination of his experiences, expertise, and perspective?
+    - Or could this article have been written by any AI-era tech blogger, and it would come out roughly the same?
+
+    **Fix**: If the article feels generic, the problem is usually in the core angle or the cultural elevation. Go back to the material and ask: what is the one thing about this topic that specifically connects to Khazix's history, his experiences, his ongoing preoccupations? That connection is the unique angle. Build around it.
+  </Accordion>
+  <Accordion title="L4-3: Posture Check（姿态检查）">
+    - Is the tone "a knowledgeable ordinary person earnestly sharing something that moved them"?
+    - Or has it slid into either: a teacher educating students, or a brand doing marketing?
+
+    The "teacher" failure mode: the article tells the reader what to think, what to do, how to be. It lectures. It has conclusions without uncertainty.
+
+    The "brand" failure mode: the article promotes without hesitation, glosses over real flaws, uses enthusiasm as a substitute for substance.
+
+    **Fix**: Find the sections that feel like lectures or promotions. Rewrite them with a personal perspective ("我自己的感受是")、uncertainty ("我也不确定这适不适合所有人")、or acknowledged flaws ("当然，它也有一些地方让我觉得没想到").
+  </Accordion>
+  <Accordion title="L4-4: Flow / 心流 Check">
+    Read the full article from start to finish without stopping. Mark every moment where your attention breaks — where you have to re-read a sentence, re-trace a logical step, or where the rhythm suddenly feels mechanical.
+
+    Every marked moment is a rhythm problem that needs to be fixed.
+
+    Common causes of flow breaks:
+    - A transition that doesn't make logical sense
+    - A paragraph that drifts too far from the main line without an anchor sentence
+    - Three or more sentences in a row with the same structure or similar length
+    - A knowledge-delivery block that reads like a textbook
+    - A conclusion that arrives without enough setup
+
+    **Fix**: For each marked break, identify the cause using the L1–L3 criteria. Fix the specific mechanical problem. Then re-read to confirm the flow is restored.
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  L4 has no mechanical fix. You cannot patch a human-feel failure with a word substitution or structural adjustment. The core operation is: find the AI-flavored sections, imagine how Khazix himself would actually say this, and rewrite with more colloquial language, more imperfection, more private perspective. If you can't figure out how Khazix would say it, that's a signal to go back to the source material and find the real personal angle that's missing.
+</Warning>
+
+---
+
+## Quality Report Output Format
+
+After completing all four layers, output a quality report in this exact format:
+
+```
+## 质检报告
+
+**L1 硬性规则** ✅/❌
+- 禁用词：X处命中（已修复/待修复）
+- 禁用标点：X处命中（已修复/待修复）
+- 结构套话：X处命中（已修复/待修复）
+- 空泛工具名：X处（已修复/待修复）
+
+**L2 风格一致性** ✅/❌
+- 开头：✅/❌
+- 节奏：✅/❌（具体问题：...）
+- 口语化：✅/❌（使用了X个口语词组）
+- 标点禁令二次确认：✅/❌
+
+**L3 内容质量** ✅/❌
+- 观点支撑：✅/❌
+- 知识输出：✅/❌
+- 文化升维：✅/❌
+- 对立面与同理心：✅/❌
+- 类型专项：✅/❌
+- 逐一展示：✅/❌/不适用
+
+**L4 活人感** ✅/❌
+- 温度感：✅/❌（具体段落：...）
+- 独特性：✅/❌
+- 姿态：✅/❌
+- 心流：✅/❌（断点位置：...）
+
+**总评**：4层全部通过 / X层需要返工
+**修复优先级**：[列出最需要修复的1-3个具体问题]
+```
+
+<Tip>
+  The report must be specific. "L2 节奏：❌（具体问题：第3段和第4段连续5句话长度相近，节奏呆板）" is useful. "L2 节奏：❌" is not. Always include the specific location and nature of each failure.
+</Tip>

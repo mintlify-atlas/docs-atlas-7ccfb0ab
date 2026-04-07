@@ -1,97 +1,59 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "Agent Skills"
+description: "Open-source AI Skills by Khazix — structured, composable instruction sets that extend AI agent capabilities across tools."
 ---
 
-## Setting up
+Khazix Skills is an open-source collection of AI Skills following the [Agent Skills](https://agentskills.io) open standard. Each skill packages domain expertise into a portable, reusable module that AI agents load on demand — so you get consistent, high-quality outputs without repeating yourself.
 
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="What is a Skill?" icon="lightbulb" href="/what-is-a-skill">
+    Understand the Agent Skills standard and how composable skills work.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Installation" icon="download" href="/installation">
+    Install skills via your AI agent or manually with a `.skill` package.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Khazix Writer" icon="pen-nib" href="/khazix-writer/overview">
+    Write WeChat long-form articles in Khazix's signature voice and style.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="Style Reference" icon="book-open" href="/reference/style-examples">
+    Concrete before/after examples showing the Khazix writing style in action.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## Get started in minutes
 
-Everything you need to create world-class documentation.
+<Steps>
+  <Step title="Choose a skill">
+    Browse the available skills. Start with **khazix-writer** for WeChat long-form content creation.
+  </Step>
+  <Step title="Install via your agent">
+    In Claude Code, Codex, or OpenClaw, say: `安装这个 skill：https://github.com/KKKKhazix/khazix-skills`
+  </Step>
+  <Step title="Trigger the skill">
+    Ask your agent to write an article. The skill activates automatically when you mention writing, drafting, or WeChat articles — or call it directly with `/khazix-writer`.
+  </Step>
+  <Step title="Review with the quality checklist">
+    After generation, run through the four-layer self-check (L1–L4) to ensure the article passes all style and quality gates.
+  </Step>
+</Steps>
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+## Why use skills?
 
-## Need inspiration?
+<CardGroup cols={2}>
+  <Card title="Composable" icon="puzzle-piece">
+    Multiple skills can work together. Stack writing, research, and editing skills for complex workflows.
+  </Card>
+  <Card title="Portable" icon="arrow-right-arrow-left">
+    The same skill works across Claude Code, Codex, OpenClaw, and any Agent Skills-compatible tool.
+  </Card>
+  <Card title="On-demand loading" icon="bolt">
+    Agents load skills only when relevant, keeping context lean and responses focused.
+  </Card>
+  <Card title="Battle-tested" icon="shield-check">
+    These are Khazix's personal skills — refined over years of real content creation, open-sourced as-is.
+  </Card>
+</CardGroup>
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+<Note>
+  All skills in this collection are published under the MIT License and are open-sourced without modification from the author's personal workflow.
+</Note>
